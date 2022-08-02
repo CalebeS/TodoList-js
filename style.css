@@ -107,3 +107,10 @@ body {
     font-style: italic;
     font-weight: normal;
 }
+
+/* 
+<label class="todo__item">
+<input type="checkbox">
+<div>${tarefa}</div>
+input type="button" value="x">
+*/
