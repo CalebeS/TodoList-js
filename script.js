@@ -31,9 +31,8 @@ const limparTarefa = () => {
 const atualizarTela = () => {
     limparTarefa();
     banco.forEach((item, indice) => criarItem(item.tarefa, item.status, indice));
+//chamando a função limpar tarefa antes de atualizar tela pra evitar duplicação de tarefas ao serem adicionadas.
 }
-
-//chamando a função limpar tarefa antes de atualizar tela pra evitar duplicação de tarefas
 
 const inserirTarefa = (evento) => {
     const tecla = evento.key;
@@ -45,10 +44,32 @@ const inserirTarefa = (evento) => {
     }
 }
 
+const removerItem = (indice) => {
+    banco.splice(indice, 1);
+    atualizarTela();
+}
+//.splice altera o conteúdo de um array, adicionando ou removendo
+//ele não removeu do html, mais sim do banco, e chamando a  função atualizar tela modificou minha tela, mostrando os itens que consta.
+
+const atualizarItem = (indice) => {
+    banco[indice].status = banco[indice].status === '' ? 'checked' : '';
+    atualizarTela();
+}
+// ? seria o mesmo que então, e o : seria o mesmo que se não 
+// se o status estiver desmarcado então(?) marca, se não(:) desmarca.
+
 const clickItem = (evento) => {
     const elemento = evento.target;
-    console.log(elemento)
+    if(elemento.type === 'button') {
+        const indice = elemento.dataset.indice;
+        removerItem(indice)
+    }else if(elemento.type === 'checkbox') {
+        const indice = elemento.dataset.indice;
+        atualizarItem(indice);
+    }
 }
+//.dataset é a propriedade do elemento pra poder pegar o valor do indice no data-indice
+
 
 document.getElementById('newItem').addEventListener('keypress', inserirTarefa);
 document.getElementById('todoList').addEventListener('click', clickItem);
