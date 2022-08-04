@@ -9,7 +9,6 @@ let banco = [];
 const getBanco = () => JSON.parse(localStorage.getItem('todoList')) ?? [];
 const setBanco = (banco) => localStorage.setItem ('todoList', JSON.stringify(banco));
 
-
 //função de criar item e adicionar no html, como filho da div pai.
 // adicionando data-indice nos itens criados, para quando for clicado no status ou clicado no X, acionar um evento no banco de dados pelo id do botão clicado, usando data em vez de id pois fica melhor para manipular via JSON
 const criarItem = (tarefa, status, indice) => {
